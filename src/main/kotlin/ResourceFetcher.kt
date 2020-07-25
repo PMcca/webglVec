@@ -15,18 +15,22 @@ class ResourceFetcher() {
         params.mode = "same-origin"
     }
 
-    suspend fun getResource(uri: String, glApp: WebGLApplication): Promise<String> {
-
-        var result: String? = null
-        val p = window.fetch(uri, params)
-            .then { response -> response.text() }
-            .then { text ->
-                println("Loaded ${text}")
-                glApp.createShader(0, text)
-                text
-            }
-            .catch { e -> error("Error loading resource ${e}") }
-
-        return p
+    // Fetch all src code resources needed to initialise the application
+    fun getResources(uri: String): Array<Promise<String>> {
+        var promises = mutableListOf<Promise<String>>()
+        promises.add(window.fetch(uri, params).then {response -> response.text()}.then {text -> text})
+        println("Params is now $params")
+//
+//        var result: String? = null
+//        val p = window.fetch(uri, params)
+//            .then { response -> response.text() }
+//            .then { text ->
+//                println("Loaded ${text}")
+//                text
+//            }
+//            .catch { e -> error("Error loading resource ${e}") }
+//
+//        return p
+        return promises.toTypedArray()
     }
 }

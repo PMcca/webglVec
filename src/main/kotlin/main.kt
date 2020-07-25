@@ -5,7 +5,7 @@ import org.khronos.webgl.WebGLRenderingContext as GL
 import org.w3c.dom.HTMLCanvasElement
 import kotlin.browser.document
 import kotlin.browser.window
-import kotlin.coroutines.*
+import kotlin.js.Promise
 
 
 class WebGLApplication() {
@@ -98,8 +98,11 @@ class WebGLApplication() {
 
 fun main()  {
     document.body?.onload = {
-        ResourceFetcher().getResource("glsl/frag-shader.glsl")
-        val webGlApp = WebGLApplication()
+        Promise.all(ResourceFetcher().getResources("glsl/frag-shader.glsl")).then { res ->
+            println(res.toString())
+        }
+
+//        val webGlApp = WebGLApplication()
 
         val canvas = document.getElementById("glCanvas") as HTMLCanvasElement
         val gl = canvas.getContext("webgl") as GL
