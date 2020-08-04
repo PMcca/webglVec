@@ -22,7 +22,7 @@ class ResourceFetcher(
 
         // Fetch shaders
         promises.add(fetchResource(vertShaderUri) { s -> resources.vertSrc = s})
-        promises.add(fetchResource(fragShaderUri) {s -> resources.fragSrc = s})
+        promises.add(fetchResource(fragShaderUri) { s -> resources.fragSrc = s})
 
         // Wait on all promises, then run app
         Promise.all(promises.toTypedArray()).then {_ -> run(resources)}
