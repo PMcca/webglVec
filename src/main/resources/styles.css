@@ -1,3 +1,5 @@
 #glCanvas {
     border-style: solid;
+    width: 640px;
+    height: 480px;
 }

@@ -9,5 +9,5 @@ void main() {
     // is responsible for setting
     gl_Position = a_position;
 
-    v_color = gl_Position * 0.5 + 0.5;
+//    v_color = gl_Position * 0.5 + 0.5;
 }

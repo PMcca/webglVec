@@ -65,7 +65,7 @@ class WebGLApplication(resources: Resources) {
         gl.bufferData(WebGLRenderingContext.ARRAY_BUFFER, data, WebGLRenderingContext.STATIC_DRAW)
         gl.enableVertexAttribArray(attrLocation)
         gl.vertexAttribPointer(attrLocation, 2, WebGLRenderingContext.FLOAT, false, 0, 0)
-        println("Created attribute ${name} with data ${data}")
+        console.log("Created attribute ${name} with data ${data}")
     }
 
     public fun init() {
@@ -86,11 +86,10 @@ class WebGLApplication(resources: Resources) {
      * Perpetually clears the rendering context/canvas and draws next scene.
      */
     private fun render() {
-        while(true) {
-            gl.clearColor(0.0f, 0.0f, 0.0f, 1.0f)
+            gl.clearColor(1.0f, 1.0f, 1.0f, 1.0f)
             gl.clear(WebGLRenderingContext.COLOR_BUFFER_BIT or WebGLRenderingContext.DEPTH_BUFFER_BIT)
-            window.requestAnimationFrame { draw() }
-        }
+            draw()
+            window.requestAnimationFrame { render() }
     }
 
     /**
